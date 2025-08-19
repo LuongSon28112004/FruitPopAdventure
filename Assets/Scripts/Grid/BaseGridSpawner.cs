@@ -8,11 +8,9 @@ public abstract class BaseGridSpawner : BaseMonoBehaviour
     [SerializeField] protected int rows = 7;              // số hàng
     [SerializeField] protected int cols = 7;              // số cột
 
-    protected override void Start()
-    {
-        SpawnGrid();
-    }
+    public int Rows { get => rows; set => rows = value; }
+    public int Cols { get => cols; set => cols = value; }
 
-    protected abstract void SpawnGrid();
+    public abstract void SpawnGrid();
    
 }

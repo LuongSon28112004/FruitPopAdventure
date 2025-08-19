@@ -21,18 +21,21 @@ public class ItemClickController : MonoBehaviour
 
             var item = hit.collider.gameObject;
             MoveToBottomSlot(item);
-            GameObject randomItem = GridRandomSpawner.Instance.CellRandomPrefabs[0];
+            GameObject randomItem = GameManager.Instance.CellItemManager.CellRandomPrefabs[0];
             TypeItem typeItem1 = randomItem.GetComponent<TypeItem>();
             if (typeItem1 != null) typeItem1.IsClick = isClick.True; 
             randomItem.transform.SetParent(CellGrid.transform, false);
-            GridRandomSpawner.Instance.CellRandomPrefabs.RemoveAt(0);
-            GridRandomSpawner.Instance.addItem();
+            GameManager.Instance.CellItemManager.CellRandomPrefabs.RemoveAt(0);
+            GameManager.Instance.CellItemManager.addItem();
             AudioManager.Instance.PlaySound(AudioManager.Instance.clickSound);
         }
     }
 
     protected virtual void MoveToBottomSlot(GameObject item)
     {
+        TypeItem typeItem = item.GetComponent<TypeItem>();
+        if (typeItem == null) return;
+        typeItem.IsClick = isClick.False;
         var spawner = GridPlaySpawner.Instance;
         if (spawner.CountIndex >= spawner.CellPlayPrefabs.Count) return;
 

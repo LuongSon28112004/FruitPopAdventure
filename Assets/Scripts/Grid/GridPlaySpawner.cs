@@ -20,7 +20,7 @@ public class GridPlaySpawner : BaseGridSpawner
         instance = this;
     }
 
-    protected override void SpawnGrid()
+    public override void SpawnGrid()
     {
         cellPlayPrefabs = new List<GameObject>();
         for (int row = 0; row < rows; row++)
