@@ -16,7 +16,6 @@ public class LevelManager : BaseMonoBehaviour
         base.Start();
         level = Level.Level1;
     }
-
     public void InitLevel(Level level)
     {
         GridLayoutGroup gridLayoutCell;
@@ -34,7 +33,7 @@ public class LevelManager : BaseMonoBehaviour
                 gridLayoutRandom.constraintCount = 5;
                 GridCellSpawner.Instance.Cols = 5;
                 GridCellSpawner.Instance.Rows = 5;
-                GridPlaySpawner.Instance.Cols = 5;
+                GridPlaySpawner.Instance.Cols = 4;
                 GridPlaySpawner.Instance.Rows = 1;
                 GridRandomSpawner.Instance.Cols = 5;
                 GridRandomSpawner.Instance.Rows = 1;
@@ -48,7 +47,7 @@ public class LevelManager : BaseMonoBehaviour
                 gridLayoutRandom.constraintCount = 6;
                 GridCellSpawner.Instance.Cols = 6;
                 GridCellSpawner.Instance.Rows = 6;
-                GridPlaySpawner.Instance.Cols = 6;
+                GridPlaySpawner.Instance.Cols = 5;
                 GridPlaySpawner.Instance.Rows = 1;
                 GridRandomSpawner.Instance.Cols = 6;
                 GridRandomSpawner.Instance.Rows = 1;
