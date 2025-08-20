@@ -41,12 +41,7 @@ public class GameManager : BaseMonoBehaviour
         levelManager.LoadLevel();
         remainingQuantity = getTotalItem(levelManager.Level);
         remainingQuantity = remainingQuantity - cellItemManager.CellPrefabs.Count;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.R)) WinPannelManager.ShowWin(1000);
+        GameManager.Instance.WinPannelManager.ShowWin(999);
     }
 
     public int getTotalItem(Level level)

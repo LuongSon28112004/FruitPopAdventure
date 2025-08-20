@@ -49,6 +49,55 @@ public class ItemClickController : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private GameObject fragmentPrefab;
+
+    [SerializeField]
+    private int fragmentCount = 8;
+
+    [SerializeField]
+    private float explosionRadius = 1f;
+
+    // danh sách màu explosion
+    [SerializeField]
+    private Color[] explosionColors =
+    {
+        Color.red,
+        new Color(1f, 0.5f, 0f), 
+        Color.yellow,
+        Color.cyan,
+        Color.magenta,
+    };
+
+    private void DoExplosion(Vector3 position, Color baseColor)
+    {
+        for (int i = 0; i < fragmentCount; i++)
+        {
+            // Random hướng bay ra
+            Vector2 dir2D = UnityEngine.Random.insideUnitCircle.normalized * explosionRadius;
+            Vector3 target = position + new Vector3(dir2D.x, dir2D.y, 0f);
+
+            // Random màu (không phải lúc nào cũng màu đỏ)
+            Color chosenColor = explosionColors[
+                UnityEngine.Random.Range(0, explosionColors.Length)
+            ];
+
+            GameObject frag = Instantiate(fragmentPrefab, position, Quaternion.identity);
+            var sr = frag.GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.color = chosenColor;
+
+            // Tween bay ra + nổ to + biến mất
+            Sequence seq = DOTween.Sequence();
+            seq.Append(frag.transform.DOScale(2f, 0.15f)); // phóng to nhanh -> cảm giác nổ
+            seq.Append(frag.transform.DOScale(0f, 0.35f)); // rồi nhỏ dần biến mất
+            seq.Join(frag.transform.DOMove(target, 0.5f).SetEase(Ease.OutCubic));
+            if (sr != null)
+                seq.Join(sr.DOFade(0f, 0.5f));
+            seq.OnComplete(() => Destroy(frag));
+        }
+    }
+
     protected virtual void MoveToBottomSlot(GameObject item)
     {
         TypeItem typeItem = item.GetComponent<TypeItem>();
@@ -121,10 +170,33 @@ public class ItemClickController : MonoBehaviour
             var obj = items[idx];
             if (obj == null)
                 continue;
-            items[idx] = null; // bỏ tham chiếu trước cho chắc
-            obj.transform.DOScale(Vector3.zero, 0.25f).OnComplete(() => Destroy(obj));
-        }
 
+            items[idx] = null; // bỏ tham chiếu trước cho chắc
+
+            var sr = obj.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                // Tween đồng thời scale và color
+                Sequence seq = DOTween.Sequence();
+                seq.Join(obj.transform.DOScale(Vector3.zero, 0.25f));
+                seq.Join(sr.DOColor(Color.red, 0.25f)); // đổi sang màu đỏ khi biến mất
+                seq.OnComplete(() =>
+                {
+                    // gọi hiệu ứng nổ
+                    DoExplosion(obj.transform.position, sr.color);
+                    Destroy(obj);
+                });
+            }
+            else
+            {
+                obj.transform.DOScale(Vector3.zero, 0.25f)
+                    .OnComplete(() =>
+                    {
+                        DoExplosion(obj.transform.position, Color.yellow);
+                        Destroy(obj);
+                    });
+            }
+        }
         // Dịch các item còn lại để không bị lỗ hổng & cập nhật CountIndex
         CompactSlots();
     }
