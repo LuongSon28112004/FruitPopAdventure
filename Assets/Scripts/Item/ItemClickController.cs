@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -8,6 +9,11 @@ public class ItemClickController : MonoBehaviour
     private GameObject CellGrid;
 
     void Update()
+    {
+        this.ClickItem();
+    }
+
+    private void ClickItem()
     {
         if (Input.GetMouseButtonDown(0))
         {
