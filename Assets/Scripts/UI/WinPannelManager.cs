@@ -24,7 +24,7 @@ public class WinPanelManager : MonoBehaviour
     private Button replayButton; // đổi sang Image nếu chỉ hiển thị
 
     [SerializeField]
-    private Button continueButton;
+    private Button DoneButton;
 
     [SerializeField]
     private List<ParticleSystem> confettiEffects;
@@ -40,7 +40,7 @@ public class WinPanelManager : MonoBehaviour
             star.transform.localScale = Vector3.zero;
         scoreText.alpha = 0;
         replayButton.transform.localScale = Vector3.zero;
-        continueButton.transform.localScale = Vector3.zero;
+        DoneButton.transform.localScale = Vector3.zero;
 
         // Stop toàn bộ confetti nếu đang chạy
         foreach (var fx in confettiEffects)
@@ -101,7 +101,7 @@ public class WinPanelManager : MonoBehaviour
         seq.Append(replayButton.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack));
 
         // Cuối cùng hiện nút Continue
-        seq.Append(continueButton.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
+        seq.Append(DoneButton.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
     }
 
     public void HideWin()
