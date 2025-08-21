@@ -39,6 +39,29 @@ public class CellItemManager : BaseMonoBehaviour
         set => dict = value;
     }
 
+    [SerializeField]
+    private bool isWin;
+    public bool IsWin
+    {
+        get => isWin;
+        set => isWin = value;
+    }
+    public event Action<int> OnWinGame;
+
+    protected override void Update()
+    {
+        this.DoneLevel();
+    }
+
+    private void DoneLevel()
+    {
+        if (cellRandomPrefabs.Count == 0 && cellPrefabs.Count == 0 && !isWin)
+        {
+            OnWinGame?.Invoke(999);
+            isWin = true;
+        }
+    }
+
     public virtual void addItem()
     {
         var newCell = Instantiate(cellPrefab, Holder.transform);
@@ -92,7 +115,7 @@ public class CellItemManager : BaseMonoBehaviour
         if (needFix.Count > 0)
         {
             int randIndex = UnityEngine.Random.Range(0, needFix.Count); // random index
-            return needFix[randIndex]; // trả về giá trị thật (1,4,7,...)
+            return needFix[randIndex]; 
         }
         return UnityEngine.Random.Range(0, 7);
     }

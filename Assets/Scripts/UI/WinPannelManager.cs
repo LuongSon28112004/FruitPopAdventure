@@ -46,7 +46,7 @@ public class WinPanelManager : MonoBehaviour
         foreach (var fx in confettiEffects)
         {
             var main = fx.main;
-            main.simulationSpeed = 0.85f; // mặc định = 1, giảm còn 0.5 sẽ chậm đi 50%
+            main.simulationSpeed = 0.85f; // mặc định = 1, giảm còn 85 sẽ chậm đi 85%
             fx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
