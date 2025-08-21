@@ -5,6 +5,7 @@ using UnityEngine.UI;   // cần cho Image
 
 public class GridCellSpawner : BaseGridSpawner
 {
+    [Header("Cell Grid Spawner Components")]
     private static GridCellSpawner instance;
     public Sprite[] randomSprites;    // danh sách sprite ngẫu nhiên để gán vào cell
 

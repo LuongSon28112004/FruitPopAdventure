@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class CellItemManager : BaseMonoBehaviour
 {
+    [Header("Cell Item Manager Components")]
     [SerializeField]
     private GameObject Holder;
 

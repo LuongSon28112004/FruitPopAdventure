@@ -9,9 +9,9 @@ public enum TotalItem
 
 public class GameManager : BaseMonoBehaviour
 {
-    [Header("Setting GameManager")]
     private static GameManager instance;
 
+    [Header("Setting GameManager")]
     [SerializeField]
     private LevelManager levelManager;
 
