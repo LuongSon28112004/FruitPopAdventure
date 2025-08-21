@@ -61,9 +61,9 @@ public class GameManager : BaseMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        levelManager.InitLevel(levelManager.Level);
+        levelManager.InitLevel(LevelCtrl.Instance.Level);
         levelManager.LoadLevel();
-        remainingQuantity = getTotalItem(levelManager.Level);
+        remainingQuantity = getTotalItem(LevelCtrl.Instance.Level);
         remainingQuantity = remainingQuantity - cellItemManager.CellPrefabs.Count;
     }
 

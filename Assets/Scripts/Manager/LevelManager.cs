@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +8,35 @@ public enum Level
     Level2 = 6,
 }
 
+public class LevelHelper
+{
+     public static int ToInt(Level level)
+    {
+        return (int)level;
+    }
+
+    // Truyền int => trả về enum
+    public static Level ToEnum(int value)
+    {
+        if (Enum.IsDefined(typeof(Level), value))
+        {
+            return (Level)value;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "Giá trị không hợp lệ cho enum Type");
+        }
+    }
+}
+
 public class LevelManager : BaseMonoBehaviour
 {
-    public Level Level { get => level; set => level = value; }
-    [SerializeField] private Level level;
+    // public Level Level { get => level; set => level = value; }
+    // [SerializeField] private Level level;
     protected override void Start()
     {
         base.Start();
-        level = Level.Level1;
+        //level = Level.Level1;
     }
     public void InitLevel(Level level)
     {
