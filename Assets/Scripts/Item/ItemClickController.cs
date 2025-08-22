@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ItemClickController : MonoBehaviour
 {
+    [Header("Cell Grid Components")]
     [SerializeField]
     private GameObject CellGrid;
 

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Audio Manager Components")]
     public static AudioManager Instance;
 
     public AudioClip matchSound;   // Âm thanh khi ghép thành công

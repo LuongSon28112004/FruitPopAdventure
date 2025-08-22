@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LevelCtrl : BaseMonoBehaviour
 {
+    [Header("Singleton")]
     private static LevelCtrl instance;
 
     public static LevelCtrl Instance
@@ -9,6 +10,7 @@ public class LevelCtrl : BaseMonoBehaviour
         get => instance;
     }
 
+    [Header("LevelController Components")]
     [SerializeField]
     private Level level;
     public Level Level { get => level; set => level = value; }
