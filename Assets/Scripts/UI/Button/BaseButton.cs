@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public abstract class BaseButton : BaseMonoBehaviour
 {
+    [Header("BaseButton Components")]
     [SerializeField] protected Button button;
 
     protected override void Awake()

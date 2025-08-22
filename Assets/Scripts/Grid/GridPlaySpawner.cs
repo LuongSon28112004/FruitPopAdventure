@@ -5,6 +5,7 @@ public class GridPlaySpawner : BaseGridSpawner
 {
     private static GridPlaySpawner instance;
     public static GridPlaySpawner Instance => instance;
+    [Header("Play Grid Spawner Components")]
     [SerializeField] private List<GameObject> cellPlayPrefabs;   // các ô
     [SerializeField] private List<GameObject> placedItems;       // item đang nằm trong từng ô
     [SerializeField] private int countIndex = 0;

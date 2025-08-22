@@ -46,6 +46,7 @@ public enum isClick
 [Serializable]
 public class TypeItem : BaseMonoBehaviour
 {
+    [Header("TypeItem Components")]
     [SerializeField] private Type _type;
     [SerializeField] private isClick _isClick;
 

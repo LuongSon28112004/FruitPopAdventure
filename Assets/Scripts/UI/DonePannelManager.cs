@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DonePanelManager : MonoBehaviour
 {
+    [Header("WinPannelManager Components")]
     [SerializeField]
     private GameObject panel;
 

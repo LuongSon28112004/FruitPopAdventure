@@ -4,8 +4,9 @@ using UnityEngine;
 public class GridRandomSpawner : BaseGridSpawner
 {
     private static GridRandomSpawner instance;
-    public Sprite[] randomSprites; 
     public static GridRandomSpawner Instance { get => instance; set => instance = value; }
+    [Header("Random Grid Spawner Components")]
+    public Sprite[] randomSprites; 
 
     protected override void Awake()
     {
