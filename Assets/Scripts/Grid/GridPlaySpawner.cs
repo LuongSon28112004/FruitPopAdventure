@@ -12,6 +12,9 @@ public class GridPlaySpawner : BaseGridSpawner
     public List<GameObject> CellPlayPrefabs => cellPlayPrefabs;
     public List<GameObject> PlacedItems => placedItems;
     public int CountIndex { get => countIndex; set => countIndex = value; }
+    public bool IsFull { get => isFull; set => isFull = value; }
+
+    [SerializeField] private bool isFull;
 
     protected override void Awake()
     {

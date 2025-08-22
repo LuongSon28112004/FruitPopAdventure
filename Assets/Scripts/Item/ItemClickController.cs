@@ -15,6 +15,8 @@ public class ItemClickController : MonoBehaviour
 
     private void ClickItem()
     {
+        if (GameManager.Instance.IsGameOver)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -63,7 +65,7 @@ public class ItemClickController : MonoBehaviour
     private Color[] explosionColors =
     {
         Color.red,
-        new Color(1f, 0.5f, 0f), 
+        new Color(1f, 0.5f, 0f),
         Color.yellow,
         Color.cyan,
         Color.magenta,
@@ -106,7 +108,9 @@ public class ItemClickController : MonoBehaviour
         typeItem.IsClick = isClick.False;
         var spawner = GridPlaySpawner.Instance;
         if (spawner.CountIndex >= spawner.CellPlayPrefabs.Count)
+        {
             return;
+        }
 
         int index = spawner.CountIndex;
         Transform target = spawner.CellPlayPrefabs[index].transform;
@@ -123,6 +127,10 @@ public class ItemClickController : MonoBehaviour
         GameManager.Instance.CellItemManager.CellPrefabs.Remove(item);
 
         spawner.CountIndex++;
+        if (spawner.CountIndex >= spawner.PlacedItems.Count)
+        {
+            GridPlaySpawner.Instance.IsFull = true;
+        }
     }
 
     // Chỉ cần 3 item cùng loại trong 5 ô đầu (không cần liên tiếp)

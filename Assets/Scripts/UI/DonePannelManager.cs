@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WinPanelManager : MonoBehaviour
+public class DonePanelManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject panel;
+
     [SerializeField]
     private GameObject confetti;
 
@@ -29,12 +30,20 @@ public class WinPanelManager : MonoBehaviour
     [SerializeField]
     private List<ParticleSystem> confettiEffects;
 
-    public void ShowWin(int score)
+    public void Show(int score, bool isWin)
     {
+        // // Dừng game
+        // Time.timeScale = 0f;
+
         panel.SetActive(true);
         confetti.SetActive(true);
 
         // Reset trạng thái ban đầu
+        if (isWin)
+            wellDoneText.text = "COMPLETE";
+        else
+            wellDoneText.text = "FAIL";
+
         wellDoneText.transform.localScale = Vector3.zero;
         foreach (var star in stars)
             star.transform.localScale = Vector3.zero;
@@ -46,7 +55,7 @@ public class WinPanelManager : MonoBehaviour
         foreach (var fx in confettiEffects)
         {
             var main = fx.main;
-            main.simulationSpeed = 0.85f; // mặc định = 1, giảm còn 85 sẽ chậm đi 85%
+            main.simulationSpeed = 0.85f;
             fx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
@@ -54,7 +63,11 @@ public class WinPanelManager : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         // Zoom chữ Well Done
-        seq.Append(wellDoneText.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack));
+        seq.Append(
+            wellDoneText.transform.DOScale(1, 0.5f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true) // chạy khi Time.timeScale = 0
+        );
 
         // Bật confetti ngay sau khi Well Done hiện ra
         seq.AppendCallback(() =>
@@ -71,37 +84,48 @@ public class WinPanelManager : MonoBehaviour
                 stars[index]
                     .transform.DOScale(1, 0.4f)
                     .SetEase(Ease.OutBack)
+                    .SetUpdate(true)
                     .OnComplete(() =>
                     {
-                        stars[index].transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f);
+                        stars[index].transform
+                            .DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f)
+                            .SetUpdate(true);
                     })
             );
         }
 
         // Hiện điểm số (fade in + chạy đếm từ 0 → score)
-        seq.Append(scoreText.DOFade(1, 0.3f));
+        seq.Append(scoreText.DOFade(1, 0.3f).SetUpdate(true));
         seq.AppendCallback(() =>
         {
             int currentScore = 0;
-            DOTween
-                .To(
-                    () => currentScore,
-                    x =>
-                    {
-                        currentScore = x;
-                        scoreText.text = "Score: " + currentScore.ToString("N0");
-                    },
-                    score,
-                    1.5f
-                )
-                .SetEase(Ease.Linear);
+            DOTween.To(
+                () => currentScore,
+                x =>
+                {
+                    currentScore = x;
+                    scoreText.text = "Score: " + currentScore.ToString("N0");
+                },
+                score,
+                1.5f
+            )
+            .SetEase(Ease.Linear)
+            .SetUpdate(true);
         });
 
         // Hiện nút replay
-        seq.Append(replayButton.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack));
+        seq.Append(
+            replayButton.transform.DOScale(0.05f, 0.5f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true)
+        );
 
-        // Cuối cùng hiện nút Continue
-        seq.Append(DoneButton.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
+        // Cuối cùng hiện nút Done
+        seq.Append(
+            DoneButton.transform.DOScale(0.05f, 0.4f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true)
+        );
     }
 
     public void HideWin()
@@ -113,5 +137,8 @@ public class WinPanelManager : MonoBehaviour
         {
             fx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+
+        // Cho game chạy lại
+        Time.timeScale = 1f;
     }
 }

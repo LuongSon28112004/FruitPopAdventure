@@ -39,28 +39,6 @@ public class CellItemManager : BaseMonoBehaviour
         set => dict = value;
     }
 
-    [SerializeField]
-    private bool isWin;
-    public bool IsWin
-    {
-        get => isWin;
-        set => isWin = value;
-    }
-    public event Action<int> OnWinGame;
-
-    protected override void Update()
-    {
-        this.DoneLevel();
-    }
-
-    private void DoneLevel()
-    {
-        if (cellRandomPrefabs.Count == 0 && cellPrefabs.Count == 0 && !isWin)
-        {
-            OnWinGame?.Invoke(999);
-            isWin = true;
-        }
-    }
 
     public virtual void addItem()
     {
