@@ -10,7 +10,7 @@ public class LevelButton : BaseButton
     if (Enum.TryParse(parentName, out Level level))
     {
         LevelCtrl.Instance.Level = level;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("GamePlay");
     }
     else
     {

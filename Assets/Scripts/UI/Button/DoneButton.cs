@@ -10,7 +10,7 @@ public class DoneButton : BaseButton
         GameManager.Instance.CheckLoss = false;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("UILevelGame");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
