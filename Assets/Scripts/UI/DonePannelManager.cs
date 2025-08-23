@@ -31,17 +31,24 @@ public class DonePanelManager : BaseMonoBehaviour
 
     [SerializeField]
     private List<ParticleSystem> confettiEffects;
+
     [SerializeField]
     private Stars soStar;
+
     [SerializeField]
     private int starCountYellow;
 
-    public int StarCountYellow { get => starCountYellow; set => starCountYellow = value; }
+    public int StarCountYellow
+    {
+        get => starCountYellow;
+        set => starCountYellow = value;
+    }
 
     protected override void Awake()
     {
         this.LoadSOStars();
     }
+
     private void LoadSOStars()
     {
         this.soStar = Resources.Load<Stars>("SO/Stars");
@@ -83,9 +90,7 @@ public class DonePanelManager : BaseMonoBehaviour
 
         // Zoom chữ Well Done
         seq.Append(
-            wellDoneText.transform.DOScale(1, 0.5f)
-                .SetEase(Ease.OutBack)
-                .SetUpdate(true) // chạy khi Time.timeScale = 0
+            wellDoneText.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack).SetUpdate(true) // chạy khi Time.timeScale = 0
         );
 
         // Bật confetti ngay sau khi Well Done hiện ra
@@ -103,7 +108,8 @@ public class DonePanelManager : BaseMonoBehaviour
             {
                 stars[index].GetComponent<SpriteRenderer>().sprite = soStar.stars[0];
             }
-            else stars[index].GetComponent<SpriteRenderer>().sprite = soStar.stars[1];
+            else
+                stars[index].GetComponent<SpriteRenderer>().sprite = soStar.stars[1];
             seq.Append(
                 stars[index]
                     .transform.DOScale(1, 0.4f)
@@ -111,8 +117,8 @@ public class DonePanelManager : BaseMonoBehaviour
                     .SetUpdate(true)
                     .OnComplete(() =>
                     {
-                        stars[index].transform
-                            .DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f)
+                        stars[index]
+                            .transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f)
                             .SetUpdate(true);
                     })
             );
@@ -123,33 +129,28 @@ public class DonePanelManager : BaseMonoBehaviour
         seq.AppendCallback(() =>
         {
             int currentScore = 0;
-            DOTween.To(
-                () => currentScore,
-                x =>
-                {
-                    currentScore = x;
-                    scoreText.text = "Score: " + currentScore.ToString("N0");
-                },
-                score,
-                1.5f
-            )
-            .SetEase(Ease.Linear)
-            .SetUpdate(true);
+            DOTween
+                .To(
+                    () => currentScore,
+                    x =>
+                    {
+                        currentScore = x;
+                        scoreText.text = "Score: " + currentScore.ToString("N0");
+                    },
+                    score,
+                    1.5f
+                )
+                .SetEase(Ease.Linear)
+                .SetUpdate(true);
         });
 
         // Hiện nút replay
         seq.Append(
-            replayButton.transform.DOScale(0.05f, 0.5f)
-                .SetEase(Ease.OutBack)
-                .SetUpdate(true)
+            replayButton.transform.DOScale(0.05f, 0.5f).SetEase(Ease.OutBack).SetUpdate(true)
         );
 
         // Cuối cùng hiện nút Done
-        seq.Append(
-            DoneButton.transform.DOScale(0.05f, 0.4f)
-                .SetEase(Ease.OutBack)
-                .SetUpdate(true)
-        );
+        seq.Append(DoneButton.transform.DOScale(0.05f, 0.4f).SetEase(Ease.OutBack).SetUpdate(true));
     }
 
     public void HideWin()
