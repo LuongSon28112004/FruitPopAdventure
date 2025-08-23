@@ -39,9 +39,14 @@ public class GridCellSpawner : BaseGridSpawner
                     continue;
 
                 // Tạo ô vuông UI (Grid Layout Group sẽ tự sắp xếp)
-                GameObject newCell = Instantiate(cellPrefab, transform);
-                newCell.name = $"Cell ({row}, {col})";
-                GameManager.Instance.CellItemManager.CellPrefabs.Add(newCell);
+                Transform newCell = CellItemSpawner.Instance.spawnCellItem(
+                    CellItemSpawner.cellItemName,
+                    Vector3.zero,
+                    Quaternion.identity
+                );
+                newCell.SetParent(transform, false);
+                newCell.name = "cellBackground";
+                GameManager.Instance.CellItemManager.CellPrefabs.Add(newCell.gameObject);
 
                 // Reset scale về 0 để chuẩn bị hiệu ứng
                 newCell.transform.localScale = Vector3.zero;

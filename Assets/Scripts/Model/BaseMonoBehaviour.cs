@@ -15,6 +15,11 @@ public class BaseMonoBehaviour : MonoBehaviour
         this.LoadComponents();
     }
 
+    protected virtual void Resert()
+    {
+        this.LoadComponents();
+    }
+
     protected virtual void LoadComponents()
     {
 
