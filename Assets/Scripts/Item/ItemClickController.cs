@@ -194,7 +194,7 @@ public class ItemClickController : MonoBehaviour
                 {
                     // gọi hiệu ứng nổ
                     DoExplosion(obj.transform.position, sr.color);
-                    Destroy(obj);
+                    // Destroy(obj);
 
                 });
             }
@@ -204,10 +204,12 @@ public class ItemClickController : MonoBehaviour
                     .OnComplete(() =>
                     {
                         DoExplosion(obj.transform.position, Color.yellow);
-                        Destroy(obj);
+                        // Destroy(obj);
                     });
             }
             GridPlaySpawner.Instance.IsFull = false;
+            //đưa vào objectPoolItem
+            CellItemSpawner.Instance.Despawn(obj.transform);
         }
         // Dịch các item còn lại để không bị lỗ hổng & cập nhật CountIndex
         CompactSlots();

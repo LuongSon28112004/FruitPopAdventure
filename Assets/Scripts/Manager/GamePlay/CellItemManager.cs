@@ -43,9 +43,13 @@ public class CellItemManager : BaseMonoBehaviour
 
     public virtual void addItem()
     {
-        var newCell = Instantiate(cellPrefab, Holder.transform);
-        newCell.name = $"CellRandom";
-        cellRandomPrefabs.Add(newCell);
+        var newCell = CellItemSpawner.Instance.spawnCellItem(
+            CellItemSpawner.cellItemName,
+            Vector3.zero,
+            Quaternion.identity
+        );
+        newCell.SetParent(Holder.transform, false);
+        cellRandomPrefabs.Add(newCell.gameObject);
         SpriteRenderer sr = newCell.GetComponent<SpriteRenderer>();
         if (sr != null && randomSprites.Length > 0)
         {

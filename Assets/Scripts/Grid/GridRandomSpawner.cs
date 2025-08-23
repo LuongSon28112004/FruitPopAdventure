@@ -28,9 +28,14 @@ public class GridRandomSpawner : BaseGridSpawner
         {
             for (int col = 0; col < cols; col++)
             {
-                var newCell = Instantiate(cellPrefab, transform);
-                newCell.name = $"CellRandom ({row}, {col})";
-                GameManager.Instance.CellItemManager.CellRandomPrefabs.Add(newCell);
+                 Transform newCell = CellItemSpawner.Instance.spawnCellItem(
+                    CellItemSpawner.cellItemName,
+                    Vector3.zero,
+                    Quaternion.identity
+                );
+                newCell.SetParent(transform, false);
+                newCell.name = "cellBackground";
+                GameManager.Instance.CellItemManager.CellRandomPrefabs.Add(newCell.gameObject);
                 SpriteRenderer sr = newCell.GetComponent<SpriteRenderer>();
                 if (sr != null && randomSprites.Length > 0)
                 {
@@ -47,7 +52,7 @@ public class GridRandomSpawner : BaseGridSpawner
                     }
                 }
                 newCell.transform.localScale = Vector3.zero;
-                cellRandomPrefabs.Add(newCell);
+                cellRandomPrefabs.Add(newCell.gameObject);
             }
         }
 

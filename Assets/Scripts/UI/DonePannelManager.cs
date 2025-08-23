@@ -16,6 +16,8 @@ public class DonePanelManager : BaseMonoBehaviour
 
     [SerializeField]
     private TMP_Text wellDoneText;
+    [SerializeField]
+    private TMP_Text TextLevel;
 
     [SerializeField]
     private GameObject[] stars;
@@ -69,6 +71,14 @@ public class DonePanelManager : BaseMonoBehaviour
             wellDoneText.text = "COMPLETE";
         else
             wellDoneText.text = "FAIL";
+        if (GameManager.Instance.LevelManager.Level == Level.Level1)
+        {
+            TextLevel.text = "LEVEL 1";
+        }
+        else if (GameManager.Instance.LevelManager.Level == Level.Level2)
+        {
+            TextLevel.text = "LEVEL 2";
+        }
 
         wellDoneText.transform.localScale = Vector3.zero;
         foreach (var star in stars)

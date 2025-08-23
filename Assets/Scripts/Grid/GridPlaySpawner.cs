@@ -48,9 +48,14 @@ public class GridPlaySpawner : BaseGridSpawner
         {
             for (int col = 0; col < cols; col++)
             {
-                var newCell = Instantiate(cellPrefab, transform);
-                newCell.name = $"CellPlay ({row}, {col})";
-                cellPlayPrefabs.Add(newCell);
+                Transform newCell = CellItemSpawner.Instance.spawnCellItem(
+                    CellItemSpawner.cellItemName,
+                    Vector3.zero,
+                    Quaternion.identity
+                );
+                newCell.SetParent(transform, false);
+                newCell.name = "cellBackground";
+                cellPlayPrefabs.Add(newCell.gameObject);
 
                 // Cho scale = 0 trước khi animate
                 newCell.transform.localScale = Vector3.zero;
