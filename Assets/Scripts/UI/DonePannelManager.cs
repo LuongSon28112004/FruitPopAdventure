@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DonePanelManager : MonoBehaviour
+public class DonePanelManager : BaseMonoBehaviour
 {
     [Header("WinPannelManager Components")]
     [SerializeField]
@@ -30,6 +31,23 @@ public class DonePanelManager : MonoBehaviour
 
     [SerializeField]
     private List<ParticleSystem> confettiEffects;
+    [SerializeField]
+    private Stars soStar;
+    [SerializeField]
+    private int starCountYellow;
+
+    public int StarCountYellow { get => starCountYellow; set => starCountYellow = value; }
+
+    protected override void Awake()
+    {
+        this.LoadSOStars();
+    }
+    private void LoadSOStars()
+    {
+        this.soStar = Resources.Load<Stars>("SO/Stars");
+        if (soStar == null)
+            throw new Exception("Khoong tim thay SO Stars");
+    }
 
     public void Show(int score, bool isWin)
     {
@@ -81,6 +99,11 @@ public class DonePanelManager : MonoBehaviour
         for (int i = 0; i < stars.Length; i++)
         {
             int index = i;
+            if (i < starCountYellow)
+            {
+                stars[index].GetComponent<SpriteRenderer>().sprite = soStar.stars[0];
+            }
+            else stars[index].GetComponent<SpriteRenderer>().sprite = soStar.stars[1];
             seq.Append(
                 stars[index]
                     .transform.DOScale(1, 0.4f)

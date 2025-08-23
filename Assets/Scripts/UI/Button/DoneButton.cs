@@ -18,8 +18,13 @@ public class DoneButton : BaseButton
         // hủy đăng ký để không bị gọi lại nhiều lần
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        // lấy lại StarsEffect trong scene mới
-        UILevelGameManager.Instance.AllStars[0].PlayStarEffect(3);
+        if (GameManager.Instance.LevelManager.Level == Level.Level1)
+            UILevelGameManager
+                .Instance.AllStars[0]
+                .PlayStarEffect(GameManager.Instance.DonePannelManager.StarCountYellow);
+        else if (GameManager.Instance.LevelManager.Level == Level.Level2)
+            UILevelGameManager
+                .Instance.AllStars[1]
+                .PlayStarEffect(GameManager.Instance.DonePannelManager.StarCountYellow);
     }
-
 }

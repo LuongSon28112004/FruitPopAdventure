@@ -41,6 +41,11 @@ public class GameManager : BaseMonoBehaviour
         get => donePannelManager;
         set => donePannelManager = value;
     }
+    public LevelManager LevelManager
+    {
+        get => levelManager;
+        set => levelManager = value;
+    }
     public int RemainingQuantity
     {
         get => remainingQuantity;
@@ -116,6 +121,7 @@ public class GameManager : BaseMonoBehaviour
         isDone = true;
         yield return new WaitForSeconds(1f);
         isGameOver = true;
+        donePannelManager.StarCountYellow = 3; // để tạm,sau có code tính điểm thì gán lại sau
         donePannelManager.Show(999, isDone);
     }
 
@@ -131,9 +137,15 @@ public class GameManager : BaseMonoBehaviour
     {
         isDone = false;
         checkLoss = true;
-        yield return new WaitForSeconds(1f);
-        isGameOver = true;
-        donePannelManager.Show(999, isDone);
+        yield return new WaitForSeconds(1.5f);
+        if (GridPlaySpawner.Instance.IsFull)
+        {
+            isGameOver = true;
+            donePannelManager.StarCountYellow = 0; //thua thì 0 sao là điều hiển nhiên
+            donePannelManager.Show(999, isDone);
+        }
+        else
+            checkLoss = false;
     }
 
     public int getTotalItem(Level level)

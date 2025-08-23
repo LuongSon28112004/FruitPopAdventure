@@ -31,15 +31,16 @@ public class LevelHelper
 
 public class LevelManager : BaseMonoBehaviour
 {
-    // public Level Level { get => level; set => level = value; }
-    // [SerializeField] private Level level;
+    public Level Level { get => level; set => level = value; }
+    [SerializeField] private Level level;
     protected override void Start()
     {
         base.Start();
-        //level = Level.Level1;
+        level = Level.Level1;
     }
     public void InitLevel(Level level)
     {
+        this.level = level;
         GridLayoutGroup gridLayoutCell;
         GridLayoutGroup gridLayoutPlay;
         GridLayoutGroup gridLayoutRandom;

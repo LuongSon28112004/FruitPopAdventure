@@ -20,6 +20,7 @@ public class ItemClickController : MonoBehaviour
             return;
         if (Input.GetMouseButtonDown(0))
         {
+            //check điểm chạm
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
             if (hit.collider == null)
@@ -31,8 +32,10 @@ public class ItemClickController : MonoBehaviour
                 return;
             }
 
+            //di chuyển xuống ô bên dưới
             var item = hit.collider.gameObject;
             MoveToBottomSlot(item);
+            //play sound
             AudioManager.Instance.PlaySound(AudioManager.Instance.clickSound);
             if (GameManager.Instance.CellItemManager.CellRandomPrefabs.Count != 0)
             {
@@ -108,10 +111,7 @@ public class ItemClickController : MonoBehaviour
             return;
         typeItem.IsClick = isClick.False;
         var spawner = GridPlaySpawner.Instance;
-        if (spawner.CountIndex >= spawner.CellPlayPrefabs.Count)
-        {
-            return;
-        }
+        if (spawner.CountIndex >= spawner.CellPlayPrefabs.Count) return;
 
         int index = spawner.CountIndex;
         Transform target = spawner.CellPlayPrefabs[index].transform;
@@ -122,6 +122,7 @@ public class ItemClickController : MonoBehaviour
             {
                 spawner.PlacedItems[index] = item;
                 item.transform.SetParent(target);
+                item.GetComponent<SpriteRenderer>().sortingOrder = item.GetComponent<SpriteRenderer>().sortingOrder + 3;
 
                 CheckMatchAny();
             });
@@ -194,6 +195,7 @@ public class ItemClickController : MonoBehaviour
                     // gọi hiệu ứng nổ
                     DoExplosion(obj.transform.position, sr.color);
                     Destroy(obj);
+
                 });
             }
             else
@@ -205,6 +207,7 @@ public class ItemClickController : MonoBehaviour
                         Destroy(obj);
                     });
             }
+            GridPlaySpawner.Instance.IsFull = false;
         }
         // Dịch các item còn lại để không bị lỗ hổng & cập nhật CountIndex
         CompactSlots();
