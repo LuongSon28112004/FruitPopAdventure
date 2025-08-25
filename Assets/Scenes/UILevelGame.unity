@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'your booster:'
+  m_text: YOUR BOOSTER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7722038552eb6d64190123f494f8b584, type: 2}
   m_sharedMaterial: {fileID: -5481786052834627111, guid: 7722038552eb6d64190123f494f8b584, type: 2}
