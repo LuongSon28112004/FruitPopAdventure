@@ -16,8 +16,8 @@ public class ButtonExitPopupLevel : BaseButton
     {
         popupLevelGame.SetActive(false);
         RectTransform rectTransform1 = topMenu.GetComponent<RectTransform>();
-        rectTransform1.DOMoveY(0f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây
+        rectTransform1.DOMoveY(0.15f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây
         RectTransform rectTransform2 = bottomMenu.GetComponent<RectTransform>();
-        rectTransform2.DOMoveY(0f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây
+        rectTransform2.DOMoveY(-0.15f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây
     }
 }
