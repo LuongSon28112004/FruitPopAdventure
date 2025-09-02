@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonPlay : BaseButton
+public class ButtonReplay : BaseButton
 {
     public override void OnClick()
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
-        SceneManager.LoadScene("UILevelGame");
+        SceneManager.LoadScene("GamePlay");
     }
 }

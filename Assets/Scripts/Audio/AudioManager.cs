@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip clickSound;   // Âm thanh khi nhấn ô
     public AudioClip bgMusic;      // Nhạc nền
     public AudioClip errorSound;
+    public AudioClip ButtonSound_One;
+    public AudioClip ButtonSound_Two;
 
     private AudioSource audioSource;
 

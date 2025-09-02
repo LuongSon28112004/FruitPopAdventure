@@ -13,6 +13,7 @@ public class ButtonPlayPopupLevel : BaseButton
 
     public override void OnClick()
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
         this.getLevel();
         LevelCtrl.Instance.Level = level;
         SceneManager.LoadScene("GamePlay");

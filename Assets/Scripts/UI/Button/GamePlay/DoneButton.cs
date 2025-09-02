@@ -8,6 +8,7 @@ public class DoneButton : BaseButton
         Debug.Log("Done Clicked");
         GameManager.Instance.IsDone = false;
         GameManager.Instance.CheckLoss = false;
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene("UILevelGame");

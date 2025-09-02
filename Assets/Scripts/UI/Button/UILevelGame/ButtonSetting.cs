@@ -18,6 +18,7 @@ public class ButtonSetting : BaseButton
 
     public override void OnClick()
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
         var rectTransform = MenuGame.GetComponent<RectTransform>();
         rectTransform.DOMoveX(4.4f, 0.5f);
 

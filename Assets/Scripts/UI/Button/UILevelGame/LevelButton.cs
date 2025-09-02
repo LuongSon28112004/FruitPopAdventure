@@ -19,6 +19,7 @@ public class LevelButton : BaseButton
 
     public override void OnClick()
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
         popupLevelGame.SetActive(true);
         RectTransform rectTransform1 = topMenu.GetComponent<RectTransform>();
         rectTransform1.DOMoveY(1.2f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây

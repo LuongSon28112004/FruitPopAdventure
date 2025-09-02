@@ -13,7 +13,7 @@ public class ButtonMap : BaseButton
 
     public override void OnClick()
     {
-
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_One);
         Shop.transform.Find("PanelShop").gameObject.SetActive(false);
         Shop.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f);
         var rectTransform1 = MenuGame.GetComponent<RectTransform>();
@@ -21,7 +21,7 @@ public class ButtonMap : BaseButton
         var rectTransform2 = MenuGameBottom.GetComponent<RectTransform>();
         rectTransform2.DOMoveX(0f, 0.5f); // di chuyển sang x = 0 trong 0.5 giây
         transform.parent.Find("PanelMap").gameObject.SetActive(true);
-        transform.parent.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f);//scale button len
+        transform.parent.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.5f);//scale button len
 
     }
 
@@ -29,6 +29,6 @@ public class ButtonMap : BaseButton
     {
         base.Awake();
         transform.parent.Find("PanelMap").gameObject.SetActive(true);
-        transform.parent.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f);//scale button len
+        transform.parent.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.5f);//scale button len
     }
 }

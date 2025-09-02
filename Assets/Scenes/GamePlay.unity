@@ -629,7 +629,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2097,6 +2097,7 @@ GameObject:
   - component: {fileID: 1275686422}
   - component: {fileID: 1275686421}
   - component: {fileID: 1275686420}
+  - component: {fileID: 1275686423}
   m_Layer: 0
   m_Name: btnReplay
   m_TagString: Untagged
@@ -2205,6 +2206,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275686418}
   m_CullTransparentMesh: 1
+--- !u!114 &1275686423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275686418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702ddb5c0be42a142a2a1e49e389a96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &1277235045
 GameObject:
   m_ObjectHideFlags: 0
