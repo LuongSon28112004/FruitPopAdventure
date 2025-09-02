@@ -20,7 +20,7 @@ public class ButtonSetting : BaseButton
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonSound_Two);
         var rectTransform = MenuGame.GetComponent<RectTransform>();
-        rectTransform.DOMoveX(4.4f, 0.5f);
+        rectTransform.DOMoveX(4.55f, 0.5f);
 
         // Logo rơi xuống từ Y = 70 về Y = 19
         RectTransform logoRect = Logo.GetComponent<RectTransform>();

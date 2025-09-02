@@ -20,7 +20,7 @@ public class GameManager : BaseMonoBehaviour
     [Header("Setting GameManager")]
     [SerializeField]
     private LevelManager levelManager;
-
+    
     [SerializeField]
     private CellItemManager cellItemManager;
 
