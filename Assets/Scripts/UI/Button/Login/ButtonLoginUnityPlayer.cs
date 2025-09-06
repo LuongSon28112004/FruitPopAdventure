@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class ButtonLoginUnityPlayer : BaseButton
 {
+    [SerializeField]
+    private GameObject loadingPanel;
+
     protected override async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -14,7 +17,7 @@ public class ButtonLoginUnityPlayer : BaseButton
         PlayerAccountService.Instance.SignedIn += SignInWithUnityAuth;
     }
 
-    public async override void OnClick()
+    public override async void OnClick()
     {
         await StartPlayerAccountsSignInAsync();
     }
@@ -29,15 +32,18 @@ public class ButtonLoginUnityPlayer : BaseButton
 
         try
         {
+            loadingPanel.SetActive(true); // Hiện loading khi bắt đầu sign-in
             await PlayerAccountService.Instance.StartSignInAsync();
         }
         catch (PlayerAccountsException ex)
         {
             Debug.LogException(ex);
+            loadingPanel.SetActive(false);
         }
         catch (RequestFailedException ex)
         {
             Debug.LogException(ex);
+            loadingPanel.SetActive(false);
         }
     }
 
@@ -45,17 +51,26 @@ public class ButtonLoginUnityPlayer : BaseButton
     {
         try
         {
-            await AuthenticationService.Instance.SignInWithUnityAsync(PlayerAccountService.Instance.AccessToken);
-            Debug.Log("SignIn is successful. Player id: " + AuthenticationService.Instance.PlayerId);
+            loadingPanel.SetActive(true); // Hiện loading khi bắt đầu Auth
+            await AuthenticationService.Instance.SignInWithUnityAsync(
+                PlayerAccountService.Instance.AccessToken
+            );
+            Debug.Log(
+                "SignIn is successful. Player id: " + AuthenticationService.Instance.PlayerId
+            );
+
+            loadingPanel.SetActive(false); // Tắt loading khi thành công
             SceneManager.LoadScene("StartGame");
         }
         catch (AuthenticationException ex)
         {
             Debug.LogException(ex);
+            loadingPanel.SetActive(false);
         }
         catch (RequestFailedException ex)
         {
             Debug.LogException(ex);
+            loadingPanel.SetActive(false);
         }
     }
 }
