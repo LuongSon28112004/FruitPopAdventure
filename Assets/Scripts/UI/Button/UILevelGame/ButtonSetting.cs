@@ -24,18 +24,17 @@ public class ButtonSetting : BaseButton
 
         // Logo rơi xuống từ Y = 70 về Y = 19
         RectTransform logoRect = Logo.GetComponent<RectTransform>();
-        logoRect.DOAnchorPosY(19f, 0.6f)
-            .From(new Vector2(0, 70))
-            .SetEase(Ease.OutBounce);
+        logoRect.DOAnchorPosY(19f, 0.6f).From(new Vector2(0, 70)).SetEase(Ease.OutBounce);
 
         // Rung 2 button (shake)
         ButtonMainMenu.transform.DOShakePosition(
-            0.5f,   // thời gian rung
+            0.5f, // thời gian rung
             strength: new Vector3(10f, 10f, 0), // biên độ rung theo X,Y
-            vibrato: 15,  // số lần rung
+            vibrato: 15, // số lần rung
             randomness: 90,
             snapping: false,
-            fadeOut: true);
+            fadeOut: true
+        );
 
         ButtonBackToMap.transform.DOShakePosition(
             0.5f,
@@ -43,6 +42,7 @@ public class ButtonSetting : BaseButton
             vibrato: 15,
             randomness: 90,
             snapping: false,
-            fadeOut: true);
+            fadeOut: true
+        );
     }
 }

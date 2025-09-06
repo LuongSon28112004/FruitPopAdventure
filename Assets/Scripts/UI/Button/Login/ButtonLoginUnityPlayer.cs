@@ -3,6 +3,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonLoginUnityPlayer : BaseButton
 {
@@ -45,7 +46,8 @@ public class ButtonLoginUnityPlayer : BaseButton
         try
         {
             await AuthenticationService.Instance.SignInWithUnityAsync(PlayerAccountService.Instance.AccessToken);
-            Debug.Log("SignIn is successful. Player id: " + AuthenticationService.Instance.PlayerId );
+            Debug.Log("SignIn is successful. Player id: " + AuthenticationService.Instance.PlayerId);
+            SceneManager.LoadScene("StartGame");
         }
         catch (AuthenticationException ex)
         {
